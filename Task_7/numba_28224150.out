@@ -1,0 +1,66 @@
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28224150: <task7_numba> in cluster <dcc> Done
+
+Job <task7_numba> was submitted from host <hpclogin1> by user <s252766> in cluster <dcc> at Thu Apr 16 11:37:42 2026
+Job was executed on host(s) <n-62-31-23>, in queue <hpc>, as user <s252766> in cluster <dcc> at Thu Apr 16 11:37:43 2026
+</zhome/90/8/222920> was used as the home directory.
+</zhome/90/8/222920/Documents/project> was used as the working directory.
+Started at Thu Apr 16 11:37:43 2026
+Terminated at Thu Apr 16 11:38:16 2026
+Results reported at Thu Apr 16 11:38:16 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J task7_numba               # Job name
+#BSUB -q hpc                       # HPC queue
+#BSUB -W 0:30                      # Wall time limit (30 mins is plenty)
+#BSUB -n 1                         # Single core only for JIT testing
+#BSUB -R "rusage[mem=4000]"        # 4GB Memory
+#BSUB -o Task_7/numba_%J.out       # Log file in Task_7 folder
+#BSUB -e Task_7/numba_%J.err       # Error file in Task_7 folder
+
+# Create Task_7 directory
+mkdir -p Task_7
+
+# Activate specified environment
+source /dtu/projects/02613_2025/conda/miniconda3/bin/activate 02613_2026
+
+# Task 7a: Run for a small subset (10 floorplans)
+N_SUBSET=10
+
+echo "Starting Task 7: Numba JIT version on 1 core..."
+
+# Execute and save results
+python3 7_numba_jacobi.py $N_SUBSET > Task_7/numba_results.csv
+
+echo "Task 7 finished. Results are in Task_7/numba_results.csv"
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   32.21 sec.
+    Max Memory :                                 115 MB
+    Average Memory :                             115.00 MB
+    Total Requested Memory :                     4000.00 MB
+    Delta Memory :                               3885.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   33 sec.
+    Turnaround time :                            34 sec.
+
+The output (if any) follows:
+
+Starting Task 7: Numba JIT version on 1 core...
+Task 7 finished. Results are in Task_7/numba_results.csv
+
+
+PS:
+
+Read file <Task_7/numba_28224150.err> for stderr output of this job.
+

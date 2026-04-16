@@ -1,0 +1,67 @@
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28224234: <task8_gpu> in cluster <dcc> Done
+
+Job <task8_gpu> was submitted from host <hpclogin1> by user <s252766> in cluster <dcc> at Thu Apr 16 11:56:36 2026
+Job was executed on host(s) <n-62-20-13>, in queue <gpuv100>, as user <s252766> in cluster <dcc> at Thu Apr 16 11:57:14 2026
+</zhome/90/8/222920> was used as the home directory.
+</zhome/90/8/222920/Documents/project> was used as the working directory.
+Started at Thu Apr 16 11:57:14 2026
+Terminated at Thu Apr 16 11:57:18 2026
+Results reported at Thu Apr 16 11:57:18 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J task8_gpu                 # Job name
+#BSUB -q gpuv100                   # GPU queue 
+#BSUB -gpu "num=1:mode=exclusive_process" # Request 1 GPU
+#BSUB -W 0:30                      # Wall time limit
+#BSUB -n 1                         # Single CPU core
+#BSUB -R "rusage[mem=8000]"        # Memory allocation (8GB)
+#BSUB -o Task_8/gpu_%J.out         # Standard output log
+#BSUB -e Task_8/gpu_%J.err         # Error log
+
+# Create output directory
+mkdir -p Task_8
+
+# Activate Conda environment
+source /dtu/projects/02613_2025/conda/miniconda3/bin/activate 02613_2026
+
+# Test parameters
+N_BUILDINGS=48
+
+echo "Starting Task 8: CUDA Numba Execution on GPU..."
+
+# Run Python script
+python3 8_CUDA_streams.py $N_BUILDINGS > Task_8/gpu_results.txt 2>&1
+
+echo "Task 8 completed. Check Task_8/gpu_results.txt"
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1.43 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     8000.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   4 sec.
+    Turnaround time :                            42 sec.
+
+The output (if any) follows:
+
+Starting Task 8: CUDA Numba Execution on GPU...
+Task 8 completed. Check Task_8/gpu_results.txt
+
+
+PS:
+
+Read file <Task_8/gpu_28224234.err> for stderr output of this job.
+

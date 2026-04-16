@@ -1,0 +1,68 @@
+Running simulate.py with n=20
+Execution time: 239.020314902 seconds
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28217343: <simulate.py> in cluster <dcc> Done
+
+Job <simulate.py> was submitted from host <hpclogin1> by user <s252766> in cluster <dcc> at Wed Apr 15 12:27:38 2026
+Job was executed on host(s) <n-62-31-23>, in queue <hpc>, as user <s252766> in cluster <dcc> at Wed Apr 15 12:27:38 2026
+</zhome/90/8/222920> was used as the home directory.
+</zhome/90/8/222920/Documents/project> was used as the working directory.
+Started at Wed Apr 15 12:27:38 2026
+Terminated at Wed Apr 15 12:31:38 2026
+Results reported at Wed Apr 15 12:31:38 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J simulate.py              
+#BSUB -q hpc                      
+#BSUB -W 0:10                     
+#BSUB -n 1                        
+#BSUB -R "span[hosts=1]"         
+#BSUB -R "rusage[mem=4000]"      
+#BSUB -R "select[model == XeonGold6126]"  
+#BSUB -o Task_2/job_output_%J.out       
+#BSUB -e Task_2/job_error_%J.err        
+
+#number of floorplans to process
+n=20
+
+echo "Running simulate.py with n=$n"
+start_time=$(date +%s.%N)  
+
+# Save the result
+python3 simulate.py $n >> Task_2/output_results.csv  
+
+end_time=$(date +%s.%N)
+runtime=$(echo "$end_time - $start_time" | bc)  
+
+echo "Execution time: $runtime seconds"
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   238.94 sec.
+    Max Memory :                                 111 MB
+    Average Memory :                             103.50 MB
+    Total Requested Memory :                     4000.00 MB
+    Delta Memory :                               3889.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   240 sec.
+    Turnaround time :                            240 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <Task_2/job_error_28217343.err> for stderr output of this job.
+

@@ -1,0 +1,9 @@
+--- Processing 48 buildings on GPU ---
+Grid size: (33, 33), Block size: (16, 16)
+
+[Task 8a] Measuring pure kernel performance...
+Kernel execution time (2000 iters): 0.9605 s
+Estimated memory bandwidth: 8.13 GB/s
+
+[Task 8b] Running with CUDA Streams...
+Total time for 48 buildings (Streaming): 6.2426 s

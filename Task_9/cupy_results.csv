@@ -1,0 +1,39 @@
+--- Running Task 9: CuPy on GPU for 48 buildings ---
+building_id, time_s, mean_temp, std_temp, pct_above_18, pct_below_15
+Traceback (most recent call last):
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 731, in compile
+    nvrtc.compileProgram(self.ptr, options)
+  File "cupy_backends/cuda/libs/nvrtc.pyx", line 125, in cupy_backends.cuda.libs.nvrtc.compileProgram
+  File "cupy_backends/cuda/libs/nvrtc.pyx", line 138, in cupy_backends.cuda.libs.nvrtc.compileProgram
+  File "cupy_backends/cuda/libs/nvrtc.pyx", line 53, in cupy_backends.cuda.libs.nvrtc.check_status
+cupy_backends.cuda.libs.nvrtc.NVRTCError: NVRTC_ERROR_INVALID_OPTION (5)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/zhome/90/8/222920/Documents/project/9_cupy_jacobi.py", line 69, in <module>
+    u_final = jacobi_cupy(u, interior_mask, MAX_ITER, ABS_TOL)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/90/8/222920/Documents/project/9_cupy_jacobi.py", line 24, in jacobi_cupy
+    u_new = 0.25 * (u[:-2, 1:-1] + u[2:, 1:-1] + u[1:-1, :-2] + u[1:-1, 2:])
+                    ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1371, in cupy._core.core._ndarray_base.__add__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 1401, in cupy._core._kernel.ufunc._get_ufunc_kernel
+  File "cupy/_core/_kernel.pyx", line 1082, in cupy._core._kernel._get_ufunc_kernel
+  File "cupy/_core/_kernel.pyx", line 94, in cupy._core._kernel._get_simple_elementwise_kernel
+  File "cupy/_core/_kernel.pyx", line 82, in cupy._core._kernel._get_simple_elementwise_kernel_from_code
+  File "cupy/_core/core.pyx", line 2377, in cupy._core.core.compile_with_cache
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 536, in _compile_module_with_cache
+    return _compile_with_cache_cuda(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 580, in _compile_with_cache_cuda
+    base = _preprocess('', options, arch, backend)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 473, in _preprocess
+    result, _ = prog.compile(options)
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 750, in compile
+    raise CompileException(log, self.src, self.name, options,
+cupy.cuda.compiler.CompileException: nvrtc: error: invalid value for --gpu-architecture (-arch)
+

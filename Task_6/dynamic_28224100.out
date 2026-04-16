@@ -1,0 +1,77 @@
+Running dynamic parallel simulation for 48 buildings with 24 cores...
+Finished. Total runtime: 88.317925202 seconds
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28224100: <task6_dynamic> in cluster <dcc> Done
+
+Job <task6_dynamic> was submitted from host <hpclogin1> by user <s252766> in cluster <dcc> at Thu Apr 16 11:26:11 2026
+Job was executed on host(s) <24*n-62-21-96>, in queue <hpc>, as user <s252766> in cluster <dcc> at Thu Apr 16 11:26:12 2026
+</zhome/90/8/222920> was used as the home directory.
+</zhome/90/8/222920/Documents/project> was used as the working directory.
+Started at Thu Apr 16 11:26:12 2026
+Terminated at Thu Apr 16 11:27:41 2026
+Results reported at Thu Apr 16 11:27:41 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J task6_dynamic             # Job name
+#BSUB -q hpc                       # HPC queue
+#BSUB -W 0:15                      # Wall time limit
+#BSUB -n 24                        # Request 24 cores
+#BSUB -R "span[hosts=1]"           # Single node constraint
+#BSUB -R "rusage[mem=4000]"        # Memory per core
+#BSUB -o Task_6/dynamic_%J.out     # Standard output log path
+#BSUB -e Task_6/dynamic_%J.err     # Error log path
+
+# Create Task_6 directory
+mkdir -p Task_6
+
+# Activate environment using specified source path
+source /dtu/projects/02613_2025/conda/miniconda3/bin/activate 02613_2026
+
+# Execution parameters
+N=48
+CORES=24
+
+echo "Running dynamic parallel simulation for $N buildings with $CORES cores..."
+
+# Start timing
+start_time=$(date +%s.%N)
+
+# Run python script and save results into Task_6 folder
+python3 6_simulate_dynamic_parallel.py $N $CORES > Task_6/dynamic_results.csv
+
+# End timing and calculate runtime
+end_time=$(date +%s.%N)
+runtime=$(echo "$end_time - $start_time" | bc)
+
+echo "Finished. Total runtime: $runtime seconds"
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1415.84 sec.
+    Max Memory :                                 331 MB
+    Average Memory :                             331.00 MB
+    Total Requested Memory :                     96000.00 MB
+    Delta Memory :                               95669.00 MB
+    Max Swap :                                   -
+    Max Processes :                              28
+    Max Threads :                                32
+    Run time :                                   89 sec.
+    Turnaround time :                            90 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <Task_6/dynamic_28224100.err> for stderr output of this job.
+

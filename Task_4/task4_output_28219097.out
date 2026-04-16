@@ -1,0 +1,65 @@
+Profiling jacobi function with n=1
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28219097: <profile_jacobi> in cluster <dcc> Done
+
+Job <profile_jacobi> was submitted from host <hpclogin1> by user <s252766> in cluster <dcc> at Wed Apr 15 15:46:19 2026
+Job was executed on host(s) <n-62-31-24>, in queue <hpc>, as user <s252766> in cluster <dcc> at Wed Apr 15 15:46:23 2026
+</zhome/90/8/222920> was used as the home directory.
+</zhome/90/8/222920/Documents/project> was used as the working directory.
+Started at Wed Apr 15 15:46:23 2026
+Terminated at Wed Apr 15 15:46:33 2026
+Results reported at Wed Apr 15 15:46:33 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J profile_jacobi              
+#BSUB -q hpc                      
+#BSUB -W 0:15                     
+#BSUB -n 1                        
+#BSUB -R "span[hosts=1]"         
+#BSUB -R "rusage[mem=4000]"      
+#BSUB -R "select[model == XeonGold6126]"  
+
+# The output path
+#BSUB -o Task_4/task4_output_%J.out       
+#BSUB -e Task_4/task4_error_%J.err        
+
+source /dtu/projects/02613_2025/conda/miniconda3/bin/activate 02613_2026
+KERNPROF=/dtu/projects/02613_2025/conda/miniconda3/envs/02613_2026/bin/kernprof
+
+# Only calculate one building to record the profile
+n=1
+echo "Profiling jacobi function with n=$n"
+
+# 2. Run kernprof and save as a file
+kernprof -l -v 4_simulate_with_profile.py $n > Task_4/profiling_report.txt
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   8.90 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     4000.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   10 sec.
+    Turnaround time :                            14 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <Task_4/task4_error_28219097.err> for stderr output of this job.
+
