@@ -1,0 +1,69 @@
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28229314: <task12_run_all> in cluster <dcc> Exited
+
+Job <task12_run_all> was submitted from host <hpclogin1> by user <s252766> in cluster <dcc> at Fri Apr 17 12:08:12 2026
+Job was executed on host(s) <4*n-62-18-4>, in queue <gpua40>, as user <s252766> in cluster <dcc> at Sat Apr 18 06:28:24 2026
+</zhome/90/8/222920> was used as the home directory.
+</zhome/90/8/222920/Documents/project> was used as the working directory.
+Started at Sat Apr 18 06:28:24 2026
+Terminated at Sat Apr 18 07:28:34 2026
+Results reported at Sat Apr 18 07:28:34 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J task12_run_all            # Job name
+#BSUB -q gpua40                    # Verified Ampere queue
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -W 1:00                      # Wall time limit (1 hour should be plenty for GPU)
+#BSUB -n 4                         # CPU cores
+#BSUB -R "span[hosts=1]"           # Single node
+#BSUB -R "rusage[mem=8000]"        # Memory allocation
+#BSUB -o Task_12/run_all_%J.out    # Output log
+#BSUB -e Task_12/run_all_%J.err    # Error log
+
+mkdir -p Task_12
+
+# Clear CuPy cache
+rm -rf ~/.cupy/compiler_cache
+
+# Activate Conda environment
+source /dtu/projects/02613_2025/conda/miniconda3/bin/activate 02613_2026
+
+N_BUILDINGS=5000
+
+echo "Starting Task 12: Processing ALL buildings on GPU..."
+
+# Run 10.fix.py
+python3 10_fix.py $N_BUILDINGS > Task_12/all_results.csv 2>&1
+
+echo "Task 12 computation finished. Results are saved in Task_12/all_results.csv"
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time :                                   3595.00 sec.
+    Max Memory :                                 132 MB
+    Average Memory :                             127.20 MB
+    Total Requested Memory :                     32000.00 MB
+    Delta Memory :                               31868.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                10
+    Run time :                                   3610 sec.
+    Turnaround time :                            69622 sec.
+
+The output (if any) follows:
+
+Starting Task 12: Processing ALL buildings on GPU...
+
+
+PS:
+
+Read file <Task_12/run_all_28229314.err> for stderr output of this job.
+
